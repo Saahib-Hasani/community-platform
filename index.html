@@ -8,166 +8,25 @@
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.js"></script>
-  <script src="https://unpkg.com/react-slick@0.29.0/lib/react-slick.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/slick-carousel@1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Urdu&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans Urdu', sans-serif; direction: rtl; }
-    .banner { height: 300px; background-size: cover; background-position: center; }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState } = React;
-    const { motion } = window.FramerMotion;
-    const Slider = window.ReactSlick.default;
-
     function App() {
-      const [posts, setPosts] = useState([]);
-      const [newPost, setNewPost] = useState('');
-
-      const addPost = () => {
-        if (newPost.trim()) {
-          setPosts([...posts, { title: 'نیا پوسٹ', content: newPost }]);
-          setNewPost('');
-        }
-      };
-
-      const properties = [
-        { id: 1, title: 'شاندار گھر کراچی', price: '2 کروڑ', image: 'https://via.placeholder.com/300x200?text=Property+1' },
-        { id: 2, title: 'لاہور میں پلاٹ', price: '50 لاکھ', image: 'https://via.placeholder.com/300x200?text=Property+2' },
-      ];
-
-      const banners = [
-        { id: 1, title: 'نئی جائیداد ڈیلز!', image: 'https://via.placeholder.com/1200x300?text=Banner+1' },
-        { id: 2, title: 'گورنمنٹ ڈاکومینٹیشن سروسز', image: 'https://via.placeholder.com/1200x300?text=Banner+2' },
-      ];
-
-      const sliderSettings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-      };
-
       return (
         <div className="bg-gray-100 min-h-screen">
-          {/* Header */}
           <header className="bg-blue-600 text-white p-4 shadow-md">
-            <div className="container mx-auto flex justify-between items-center">
-              <h1 className="text-2xl font-bold">ریئل اسٹیٹ کمیونٹی</h1>
-              <nav>
-                <a href="#" className="mx-2 hover:underline">ہوم</a>
-                <a href="#" className="mx-2 hover:underline">جائیداد</a>
-                <a href="#" className="mx-2 hover:underline">سروسز</a>
-                <a href="#" className="mx-2 hover:underline">کمیونٹی</a>
-                <button className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-gray-200">لاگ ان</button>
-              </nav>
-            </div>
+            <h1 className="text-2xl font-bold">ریئل اسٹیٹ کمیونٹی</h1>
           </header>
-
-          {/* Advertisement Banners */}
-          <section className="my-8">
-            <Slider {...sliderSettings}>
-              {banners.map(banner => (
-                <div key={banner.id} className="banner" style={{ backgroundImage: `url(${banner.image})` }}>
-                  <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
-                    <h2 className="text-white text-3xl font-bold">{banner.title}</h2>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </section>
-
-          {/* News Feed */}
           <section className="container mx-auto my-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <h2 className="text-2xl font-bold mb-4">کمیونٹی نیوز فیڈ</h2>
-              <div className="flex mb-4">
-                <input
-                  value={newPost}
-                  onChange={(e) => setNewPost(e.target.value)}
-                  placeholder="پوسٹ لکھیں (جیسے جائیداد کی تفصیل یا سوال)"
-                  className="flex-1 p-2 border rounded"
-                />
-                <button
-                  onClick={addPost}
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ml-2"
-                >
-                  پوسٹ کریں
-                </button>
-              </div>
-              {posts.map((post, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="border p-4 mb-2 rounded"
-                >
-                  <h3 className="font-bold">{post.title}</h3>
-                  <p>{post.content}</p>
-                </motion.div>
-              ))}
-            </motion.div>
+            <h2 className="text-2xl font-bold">کمیونٹی نیوز فیڈ</h2>
+            <p>یہ ایک سادہ نیوز فیڈ ہے۔</p>
           </section>
-
-          {/* Property Listings */}
-          <section className="container mx-auto my-8">
-            <h2 className="text-2xl font-bold mb-4">جائیداد لسٹنگز</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {properties.map(property => (
-                <motion.div
-                  key={property.id}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white p-4 rounded-lg shadow-md"
-                >
-                  <img src={property.image} alt={property.title} className="w-full h-48 object-cover rounded" />
-                  <h3 className="text-xl font-bold mt-2">{property.title}</h3>
-                  <p className="text-gray-600">{property.price}</p>
-                  <button className="bg-blue-600 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">
-                    تفصیلات دیکھیں
-                  </button>
-                </motion.div>
-              ))}
-            </div>
-          </section>
-
-          {/* Document Upload Form */}
-          <section className="container mx-auto my-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <h2 className="text-2xl font-bold mb-4">گورنمنٹ ڈاکومینٹس اپ لوڈ کریں</h2>
-              <input type="file" className="border p-2 w-full mb-4" />
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                اپ لوڈ کریں
-              </button>
-            </motion.div>
-          </section>
-
-          {/* Footer */}
-          <footer className="bg-gray-800 text-white p-4 text-center">
-            <p>© 2025 ریئل اسٹیٹ کمیونٹی۔ تمام حقوق محفوظ ہیں۔</p>
-            <div className="mt-2">
-              <a href="#" className="mx-2 hover:underline">رابطہ کریں</a>
-              <a href="#" className="mx-2 hover:underline">ہمارے بارے میں</a>
-            </div>
-          </footer>
         </div>
       );
     }
